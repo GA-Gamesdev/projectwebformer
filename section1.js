@@ -1,2 +1,444 @@
-kaplay()
+//a bunch of section 1 code is done. but there is some stuff i would like to add
 
+kaplay({
+  loadingScreen: false,
+
+});
+
+loadBitmapFont("bitermap","https://image2url.com/r2/default/images/1768601093737-d751d431-a08c-438e-ad62-8639eb8b7ea5.png")
+
+function enemy(speed = 60, dir = 1) {
+	return {
+		id: "patrol",
+		require: [ "pos", "area" ],
+		add() {
+			this.on("collide", (solid, col) => {
+				if (col.isLeft() || col.isRight()) {
+					dir = -dir
+				}
+			})
+		},
+		update() {
+			this.move(speed * dir, 0)
+		},
+	}
+}
+
+
+
+
+setGravity(1000)
+const speed=300
+setBackground(184, 255, 248)
+let mapID = 4
+let coinamnt = 0
+let attempts = 0
+const climbspeed = 150
+let gravityflipped = "false"
+keyCollected = "false"
+
+////load assets
+
+
+
+
+
+const MAPS = [
+[""],
+[
+"  ",
+"  ",
+"  ",
+"X  ^     $              =",
+"======   =  $           =",
+"            =  $    T   =",
+"               =        =",
+"#    $                  =",
+"========= $ ======================",
+"DDDDDDDDD   DDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDD^^^DDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDD===DDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+],
+///level base below
+[
+"  ",
+"       X",
+"      === ",
+"           ^    $         =",
+"          ===   ^     T   =",          
+"                ==        =",
+"          $             ^ =",
+"#    $   ^ ^      =========",
+"===========================",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+
+],
+
+[
+"",
+"",
+"           ^",
+"       X  ===  ^",
+"      ===     ===  ^      =",
+"                  ===     =",
+"                          =",          
+"  T                    =  =",
+"#   6     ^ 6    ^        =",
+"=         =      =  =     =",
+"===========================",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+
+
+],
+
+[
+"                           ",
+"                G          ",
+"                           ",
+"        =======      ===  =",
+"                      X   =",
+"            =             =",
+"            D             =",          
+"  T         D             =",
+"#           D             =",
+"=      L    D         L   =",
+"============D=====   ======",
+"DDDDDDDDDDDDDDDDDD   DDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDD   DDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDD   X    DDDDDDDD",
+"DDDDDDDDDDDDDDDDDD^^^^^^^^DDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+
+
+],
+
+[
+"                           ",
+"                G          ",
+"                           ",
+"        =======      ===  =",
+"                      X   =",
+"            =             =",
+"            0             =",          
+"  T         0             =",
+"#           0             =",
+"=      K    0         L   =",
+"============0==============",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDD",
+
+
+],
+
+]
+
+const mapconfig = {
+tileWidth: 64,
+tileHeight: 64,
+
+pos:(0,0),
+
+    tiles:{
+        "=": () => [
+            sprite("ground"),
+            area(),
+	scale(1),
+	body({isStatic:true}),
+offscreen({hide:true}),
+"solid"
+        ],
+
+
+
+
+
+       
+
+        "#": () => [
+        sprite("player"),
+        area(),
+	pos(10,20),
+	scale(1),
+	body(),
+offscreen({hide:true}),
+"player"
+        ],
+
+        "6": () => [
+        sprite("enemy"),
+        area({ shape: new Rect(vec2(23,18), 21, 46)  }),
+	pos(10,20),
+	scale(1),
+	body(),
+offscreen({hide:true}),
+    enemy(),
+"enemy",
+"solid"
+        ],
+
+        "^": () => [
+        sprite("spike"),
+	 area({ shape: new Rect(vec2(20,10), 25, 56)  }),
+	pos(0,0),
+	scale(1),
+offscreen({hide:true}),
+body({isStatic:true}),
+"spike",
+"solid"
+        ],
+
+        "P": () => [
+        sprite("jump"),
+        area(),
+	pos(0,0),
+offscreen({hide:true}),
+	scale(1),
+"plate"
+        ],
+
+        "X": () => [
+        sprite("goal"),
+        area(),
+	pos(0,0),
+offscreen({hide:true}),
+	scale(1),
+"goal",
+"solid"
+        ],
+        "@": () => [
+        sprite("crate"),
+        area(),
+	pos(0,0),
+	scale(1),
+offscreen({hide:true}),
+	body(),
+"crate",
+"solid"
+        ],
+
+        "$": () => [
+        sprite("coin"),
+        area(),
+	pos(0,0),
+offscreen({hide:true}),
+	scale(1),
+"coin"
+        ],
+
+        "L": () => [
+        sprite("ladder"),
+        area(),
+	pos(0,0),
+offscreen({hide:true}),
+	scale(1),
+"ladder"
+        ],
+
+        "0": () => [
+        sprite("wall"),
+        area(),
+	pos(0,0),
+offscreen({hide:true}),
+	scale(1),
+body({isStatic:true}),
+"Wall",
+
+        ],
+
+        "G": () => [
+        sprite("flip"),
+        area(),
+	pos(0,0),
+offscreen({hide:true}),
+	scale(1),
+"flip"
+        ],
+
+        "T": () => [
+        sprite("tree"),
+        area(),
+	pos(0,0),
+offscreen({hide:true}),
+	scale(1.1),
+
+        ],
+
+        "D": () => [        sprite("dirt"),
+
+ 
+	pos(0,0),
+	scale(1),
+body({isStatic:true}),
+        ],
+
+        "K": () => [
+        sprite("key"),
+        area(),
+	pos(0,0),
+	scale(1),
+"key"
+        ],
+
+
+
+}
+}
+scene("game", () => {
+const level = addLevel(MAPS[mapID],mapconfig)
+
+//level display and coin display and deaths counter
+const levelcount = add([
+text("level 1",{font:"bitermap",height:48,width:1280}),
+pos(10,10),
+    color(0, 0, 0),
+
+])
+
+const coins = add([
+text("coins: 0",{font:"bitermap",height:48,width:1280}),
+pos(10,45),
+    color(0, 0, 0),
+
+])
+
+const death = add([
+text("deaths: 0",{font:"bitermap",height:48,width:1280}),
+pos(10,80),
+    color(0, 0, 0),
+
+])
+
+//player
+const player = level.get("player")[0]
+onKeyDown("right",()=>{
+player.move(speed,0)
+})
+
+onGamepadStick("left",(v)=>{
+player.move(v.x*speed,0)
+})
+
+onKeyDown("left",()=>{
+player.move(-speed,0)
+})
+
+onKeyDown("space",()=>{
+if(player.isGrounded()){
+if(gravityflipped = "false"){
+player.jump(580)
+}}})
+
+onGamepadButtonDown("south",()=>{
+if(player.isGrounded()){
+if(gravityflipped = "false"){
+player.jump(580)
+}}})
+
+//spike/death conditions
+const spike = level.get("spike")[0]
+onCollide("player","spike",()=>{
+go("game"),
+addKaboom(player.pos),
+mapID=1,
+attempts+=1
+})
+
+onKeyPress("r",()=>{
+go("game"),
+addKaboom(player.pos),
+attempts+=1
+})
+
+onGamepadButtonPress("north",()=>{
+go("game"),
+addKaboom(player.pos),
+attempts+=0.5
+})
+
+//goal
+const goal = level.get("goal")[0]
+onCollide("player","goal",()=>{
+mapID+=1
+levelcount.text = "level: "+mapID
+go("game")
+})
+levelcount.text = "level: "+mapID
+
+//coin
+const coin = level.get("coin")[0]
+player.onCollide("coin",(f)=>{
+destroy(f)
+coinamnt+=1
+coins.text = "coins: "+coinamnt
+})
+
+coins.text = "coins: "+coinamnt
+death.text = "deaths: "+attempts
+
+
+//enemy movement logic
+const SOLIDS = level.get("solid")[0]
+const enemy = level.get("enemy")[0]
+
+
+onCollide("player","enemy",()=>{
+go("game"),
+addKaboom(player.pos),
+mapID=1,
+attempts+=1
+})
+
+//gravity flip
+ 
+const ladder = level.get("ladder")[0]
+const flip = level.get("flip")[0]
+
+onCollide("player","ladder",()=>{
+player.gravityScale= -1
+player.angle=180
+})
+
+onCollide("player","flip",()=>{
+player.gravityScale= 1
+player.angle=0
+
+})
+
+const key = level.get("key")[0]
+const wall = get("wall")[40]
+
+player.onCollide("key", (k) => {
+    destroy(k)
+
+    // Destroy all walls with this tag
+    destroyAll("Wall")
+
+    debug.log("Key collected! Wall destroyed.")
+})
+wait(0, () => debug.log("Walls at start:", get("Wall").length))
+
+})
+go("game")
