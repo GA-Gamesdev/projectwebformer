@@ -22,6 +22,8 @@ adding a title screen
 
 bosses
 
+(new!) making longer levels and a world map
+
 
 
 ###### what we want to add :
