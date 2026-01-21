@@ -16,7 +16,7 @@ loadSprite("tree", "https://image2url.com/r2/default/images/1767393042998-ea2bdc
 loadSprite("dirt", "https://image2url.com/r2/default/images/1767392907228-72810848-2323-43e2-a6d0-6200431e02ab.png")
 loadSprite("ladder", "https://image2url.com/r2/default/images/1767392874973-0f462676-b9f4-47b7-abd0-a307d29ab2f2.png")
 loadSprite("flip", "https://image2url.com/r2/default/images/1767392785338-9544f032-69b9-4d05-b596-2315a2c0c648.png")
-loadSprite("wall", "https://image2url.com/r2/default/images/1767392617600-1d6e23ca-b6f4-486e-b565-087dcd61db6b.png")
+loadSprite("wall", "https://image2url.com/r2/default/images/1768961826409-c79a6f60-31d0-4084-9b69-c199ae9b13f6.png")
 loadSprite("key", "https://image2url.com/r2/default/images/1767392639254-f6b006f0-eafc-4724-a4f3-c88a8dbb3f8b.png")
 
 
@@ -150,11 +150,11 @@ const MAPS = [
 "        =======      ===  =",
 "                      X   =",
 "            =             =",
-"            0             =",          
-"  T         0             =",
-"#           0             =",
+"            D             =",          
+"  T         D             =",
+"#           D             =",
 "=      K    0         L   =",
-"============0==============",
+"===========================",
 "DDDDDDDDDDDDDDDDDDDDDDDDDDD",
 "DDDDDDDDDDDDDDDDDDDDDDDDDDD",
 "DDDDDDDDDDDDDDDDDDDDDDDDDDD",
@@ -305,6 +305,7 @@ offscreen({hide:true}),
 	pos(0,0),
 	scale(1),
 body({isStatic:true}),
+	area()
         ],
 
         "K": () => [
