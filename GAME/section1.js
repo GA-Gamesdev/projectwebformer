@@ -4,6 +4,20 @@ kaplay({
   loadingScreen: false,
 
 });
+loadSprite("player", "https://image2url.com/r2/default/images/1767393290724-f4cd0b10-37ed-49fc-b7a1-c28fc273a3c1.png")
+loadSprite("ground","https://image2url.com/r2/default/images/1767393265499-2c1de6bd-257b-4b0e-b211-44365e8585da.png")
+loadSprite("spike", "https://image2url.com/r2/default/images/1767393236351-b79257ed-5d6c-4177-9e43-c52f999a00f5.png")
+loadSprite("jump", "https://image2url.com/r2/default/images/1767393218976-05dcea83-001c-4998-b2d3-e176a3e28758.png")
+loadSprite("goal", "https://image2url.com/r2/default/images/1767236104411-ba54dbab-0aaf-4ace-99af-ce6e1610716b.png")
+loadSprite("crate", "https://image2url.com/r2/default/images/1767393183587-ebbbb814-1966-46d2-b50e-5b913baa45d7.png")
+loadSprite("coin", "https://image2url.com/r2/default/images/1767393103110-b41c3d06-760d-499f-bc6e-7635eac902ce.png")
+loadSprite("enemy", "https://image2url.com/r2/default/images/1767393076731-674bdd0d-c817-4943-b490-1ba161a7c236.png")
+loadSprite("tree", "https://image2url.com/r2/default/images/1767393042998-ea2bdc5c-212f-4710-b284-334cbceb27e3.png")
+loadSprite("dirt", "https://image2url.com/r2/default/images/1767392907228-72810848-2323-43e2-a6d0-6200431e02ab.png")
+loadSprite("ladder", "https://image2url.com/r2/default/images/1767392874973-0f462676-b9f4-47b7-abd0-a307d29ab2f2.png")
+loadSprite("flip", "https://image2url.com/r2/default/images/1767392785338-9544f032-69b9-4d05-b596-2315a2c0c648.png")
+loadSprite("wall", "https://image2url.com/r2/default/images/1767392617600-1d6e23ca-b6f4-486e-b565-087dcd61db6b.png")
+loadSprite("key", "https://image2url.com/r2/default/images/1767392639254-f6b006f0-eafc-4724-a4f3-c88a8dbb3f8b.png")
 
 loadBitmapFont("bitermap","https://image2url.com/r2/default/images/1768601093737-d751d431-a08c-438e-ad62-8639eb8b7ea5.png")
 
