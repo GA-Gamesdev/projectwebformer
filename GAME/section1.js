@@ -332,14 +332,14 @@ pos(10,10),
 ])
 
 const coins = add([
-text("coins: 0",{font:"bitermap"),
+text("coins: 0"),
 pos(10,45),
     color(0, 0, 0),
 
 ])
 
 const death = add([
-text("deaths: 0",{font:"bitermap"),
+text("deaths: 0"),
 pos(10,80),
     color(0, 0, 0),
 
