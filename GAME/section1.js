@@ -1,9 +1,17 @@
 //a bunch of section 1 code is done. but there is some stuff i would like to add
 
 kaplay({
-  loadingScreen: false,
+  width:800,
+height:600,
+crisp:true,
+canvas: document.querySelector("#mycanvas"),
 
 });
+
+canvas:{
+
+}
+
 loadSprite("player", "https://image2url.com/r2/default/images/1767393290724-f4cd0b10-37ed-49fc-b7a1-c28fc273a3c1.png")
 loadSprite("ground","https://image2url.com/r2/default/images/1767393265499-2c1de6bd-257b-4b0e-b211-44365e8585da.png")
 loadSprite("spike", "https://image2url.com/r2/default/images/1767393236351-b79257ed-5d6c-4177-9e43-c52f999a00f5.png")
@@ -331,6 +339,7 @@ const levelcount = add([
 text("level 1",{font:"happy"}),
 pos(10,10),
     color(0, 0, 0),
+ fixed(),
 
 ])
 
@@ -338,6 +347,7 @@ const coins = add([
 text("coins: 0",{font:"happy"}),
 pos(10,45),
     color(0, 0, 0),
+ fixed(),
 
 ])
 
@@ -345,6 +355,7 @@ const death = add([
 text("deaths: 0",{font:"happy"}),
 pos(10,80),
     color(0, 0, 0),
+ fixed(),
 
 ])
 
@@ -373,6 +384,11 @@ if(player.isGrounded()){
 if(gravityflipped = "false"){
 player.jump(580)
 }}})
+
+player.onUpdate(()=>{
+camPos(player.pos)
+})
+
 
 //spike/death conditions
 const spike = level.get("spike")[0]
@@ -467,7 +483,7 @@ pos(center()),
 
 add([
 text("press space start",{font:"happy"}),
-pos(500,600)
+pos(200,400)
 
 
 ])
