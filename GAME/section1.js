@@ -410,7 +410,6 @@ const spike = level.get("spike")[0]
 onCollide("player","spike",()=>{
 go("game"),
 addKaboom(player.pos),
-mapID=1,
 attempts+=1
 })
 
