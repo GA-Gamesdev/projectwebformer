@@ -1,0 +1,17 @@
+project webformer progress report 1 24 2026
+
+section 1 of the game
+#######***********
+
+player select
+******************
+
+level editor
+******************
+
+notes :
+we are currently finishing the first section and polishing it,
+i do want to work a little bit on the player select and level editor soon
+
+
+
