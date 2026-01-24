@@ -1,8 +1,1 @@
-to create assets
-1.  go to https://image2url.com
-
-2.  upload the art that was made and get the url
-
-3.  put url into assets.js
-
-4.(optional)  put finished art in folder as well(just to be safe)
+nothin
