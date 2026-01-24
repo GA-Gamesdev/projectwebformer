@@ -428,6 +428,7 @@ attempts+=0.5
 //goal
 const goal = level.get("goal")[0]
 onCollide("player","goal",()=>{
+player.destroy()
 mapID+=1
 localStorage.setItem("webformerlv", mapID);
 levelcount.text = "level: "+mapID
@@ -455,7 +456,7 @@ const enemy = level.get("enemy")[0]
 onCollide("player","enemy",()=>{
 go("game"),
 addKaboom(player.pos),
-mapID=1,
+
 attempts+=1
 })
 
