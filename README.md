@@ -55,3 +55,4 @@ mobile(soon)
 
 it will be released on the G.A games website, when its done,
 the first official beta will probably be released with the website.
+the pc and mac versions will be on itch.io
