@@ -27,6 +27,12 @@ loadSprite("ladder", "https://image2url.com/r2/default/images/1767392874973-0f46
 loadSprite("flip", "https://image2url.com/r2/default/images/1767392785338-9544f032-69b9-4d05-b596-2315a2c0c648.png")
 loadSprite("wall", "https://image2url.com/r2/default/images/1768961826409-c79a6f60-31d0-4084-9b69-c199ae9b13f6.png")
 loadSprite("key", "https://image2url.com/r2/default/images/1767392639254-f6b006f0-eafc-4724-a4f3-c88a8dbb3f8b.png")
+loadSprite("scary","https://image2url.com/r2/default/files/1770412488233-90b351ce-a5da-4c7e-9a2c-1595d2d9a2e6.png")
+loadSprite("mean","https://image2url.com/r2/default/files/1770412885351-0fda7981-2285-4b05-92f9-18966dac9442.png")
+
+
+
+
 
 loadBitmapFont("happy", "https://image2url.com/r2/default/images/1769024704895-b60f3428-ba8b-408c-ae0c-7dc49ba24c07.png", 28, 37);
 
@@ -90,15 +96,15 @@ const MAPS = [
 ],
 ///level base below
 [
-"           D                                 ", 
-"           D                                 ",
-"           D                                 ",
-"           D                                 ",
-"           D                                 ",
-"           Y                                 ",
+"                                             ", 
 "                                             ",
-"               G                             ",
-"#      =========                             ",
+"                           T                 ",
+"                                    G        ",
+"                                  =====              ",
+"                   ^^   ======    YYYYY      ",
+"                  ====                       ",
+"           !!!                               ",
+"#      =========!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
 "=======DDDDDDDDD=============================",
 "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
 "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
@@ -233,7 +239,20 @@ offscreen({hide:true}),
 body({isStatic:true}),
 "spike",
 "solid"
+
+
         ],
+
+        "!": () => [
+        sprite("mean"),
+	 area({ shape: new Rect(vec2(20,10), 25, 56)  }),
+	pos(0,0),
+	scale(1),
+offscreen({hide:true}),
+body({isStatic:true}),
+"meany",
+"solid"
+
 
         "P": () => [
         sprite("jump"),
@@ -312,7 +331,7 @@ offscreen({hide:true}),
         ],
 
         "Y": () => [
-        sprite("tree"),
+        sprite("scary"),
         area(),
 	pos(0,0),
 offscreen({hide:true}),
@@ -498,6 +517,12 @@ const terr = get("evil tree")[0]
 onCollide("player","evil tree",()=>{
 go("scary")
 })
+
+onCollide("player","meany",()=>{
+localStorage.removeItem("webformerlv")
+go("scary")
+})
+
 
 })
 
