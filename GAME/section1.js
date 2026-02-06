@@ -70,11 +70,11 @@ keyCollected = "false"
 const MAPS = [
 [""],
 [
-"                                X",
+"                                X   $$", 
 "                               ===  ==",
 "                                        ^",
-"                                       ===",
-"                                    ^^",
+"                                    $$ ===",
+"                    $               ^^",
 "                               ^^  ====",
 "                    T         ====     ",
 "                       ==== ",
@@ -90,23 +90,23 @@ const MAPS = [
 ],
 ///level base below
 [
-"  ",
-"       X",
-"      === ",
-"           ^    $         =",
-"          ===   ^     T   =",          
-"                ==        =",
-"          $             ^ =",
-"#    $   ^ ^      =========",
-"===========================",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-
+"           D                                 ", 
+"           D                                 ",
+"           D                                 ",
+"           D                                 ",
+"           D                                 ",
+"           Y                                 ",
+"                                             ",
+"               G                             ",
+"#      =========                             ",
+"=======DDDDDDDDD=============================",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
 ],
 
 [
@@ -311,6 +311,15 @@ offscreen({hide:true}),
 
         ],
 
+        "Y": () => [
+        sprite("tree"),
+        area(),
+	pos(0,0),
+offscreen({hide:true}),
+	scale(1.1),
+"evil tree"
+        ],
+
         "D": () => [        sprite("dirt"),
 
  
@@ -441,6 +450,7 @@ const coin = level.get("coin")[0]
 player.onCollide("coin",(f)=>{
 destroy(f)
 coinamnt+=1
+localStorage.setItem("webformercon",coinamnt)
 coins.text = "coins: "+coinamnt
 })
 
@@ -484,7 +494,10 @@ localStorage.setItem("webformerlv", mapID);
 go("main menu")
 })
 
-
+const terr = get("evil tree")[0]
+onCollide("player","evil tree",()=>{
+go("scary")
+})
 
 })
 
@@ -507,7 +520,8 @@ const cursor = add([
 sprite("itme"),
 scale(0.4),
 anchor("center"),
-pos(300,255)
+pos(300,255),
+area()
 
 ])
 
@@ -527,12 +541,13 @@ anchor("center"),
 scale(0.7),
 
 
+
+
 ])
 
 
-
 let selected = 0
-const optionsY = [255, 305]
+const optionsY = [255, 305,365]
 
 onKeyPress("down", () => {
     selected++
@@ -547,7 +562,14 @@ onKeyPress("up", () => {
 cursor.onUpdate(() => {
     selected = clamp(selected, 0, optionsY.length - 1)
     cursor.pos.y = optionsY[selected]
+if(selected===2){
+cursor.pos.x=260}
+else{
+cursor.pos.x=300
+}
 })
+
+
 
 onKeyPress("space",()=>{
 if(selected===0){
@@ -567,6 +589,15 @@ go("game")
 }
 })
 
+onKeyPress("space",()=>{
+if(selected===2){
+mapID=localStorage.getItem("webformercon");
+setBackground(184, 255, 248)
+go("game")
+
+}
+})
+
 })
 
 
@@ -579,3 +610,11 @@ loadSprite("title","https://image2url.com/r2/default/images/1769034760468-66770a
 loadSprite("itme","https://image2url.com/r2/default/images/1769125886850-bf4bbde8-313d-4606-aba8-7968a7902f0f.png")
 go("main menu")
 
+scene("scary",()=>{
+setBackground(0, 0, 0)
+add([
+text("boo!")
+])
+loadSound("boo!","https://image2url.com/r2/default/files/1770411402922-fbb20c36-388e-48b1-ab36-50aaff5ea908.mp3")
+play("boo!")
+})
