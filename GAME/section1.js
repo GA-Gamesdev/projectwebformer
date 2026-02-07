@@ -74,7 +74,24 @@ keyCollected = "false"
 
 
 const MAPS = [
-[""],
+["                                             ", 
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"#                                            ",
+"=============================================",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+],
 [
 "                                X   $$", 
 "                               ===  ==",
@@ -99,7 +116,7 @@ const MAPS = [
 "                                             ", 
 "                                             ",
 "                           T                 ",
-"                                    G        ",
+"                                    X        ",
 "                                  =====              ",
 "                   ^^   ======    YYYYY      ",
 "                  ====                       ",
@@ -115,27 +132,23 @@ const MAPS = [
 "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
 ],
 
-[
-"",
-"",
-"           ^",
-"       X  ===  ^",
-"      ===     ===  ^      =",
-"                  ===     =",
-"                          =",          
-"  T                    =  =",
-"#   6     ^ 6    ^        =",
-"=         =      =  =     =",
-"===========================",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-
-
+["                                             ", 
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"#                                            ",
+"=============================================",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
 ],
 
 [
@@ -364,20 +377,22 @@ offscreen({hide:true}),
 }
 scene("game", () => {
 const level = addLevel(MAPS[mapID],mapconfig)
-
+setBackground(184, 255, 248)
 //level display and coin display and deaths counter
-//change text fonts later in time
+
+
 const levelcount = add([
 text("level 1",{font:"happy"}),
 pos(10,10),
     color(0, 0, 0),
  fixed(),
+scale(0.6)
 
 ])
 
 const coins = add([
 text("coins: 0",{font:"happy"}),
-pos(10,45),
+pos(10,35),
     color(0, 0, 0),
  fixed(),
 
@@ -385,7 +400,7 @@ pos(10,45),
 
 const death = add([
 text("deaths: 0",{font:"happy"}),
-pos(10,80),
+pos(10,70),
     color(0, 0, 0),
  fixed(),
 
@@ -456,12 +471,13 @@ attempts+=0.5
 //goal
 const goal = level.get("goal")[0]
 onCollide("player","goal",()=>{
+onKeyPress("space",()=>{
 player.destroy()
+goal.destroy()
 mapID+=1
 localStorage.setItem("webformerlv", mapID);
-levelcount.text = "level: "+mapID
 go("game")
-})
+})})
 levelcount.text = "level: "+mapID
 
 //coin
@@ -523,6 +539,14 @@ localStorage.removeItem("webformerlv")
 go("scary")
 })
 
+//level names
+if(mapID===1){
+levelcount.text="level 1-1 hey thats the roof"
+}
+
+if(mapID===2){
+levelcount.text="level 1-2 scary spikes and trees"
+}
 
 })
 
@@ -601,14 +625,12 @@ if(selected===0){
 localStorage.removeItem("webformerlv")
 localStorage.setItem("webformerlv", "1");
 mapID=1
-setBackground(184, 255, 248)
 go("game")
 }
 })
 onKeyPress("space",()=>{
 if(selected===1){
 mapID=localStorage.getItem("webformerlv");
-setBackground(184, 255, 248)
 go("game")
 
 }
@@ -633,7 +655,7 @@ go("game")
 
 loadSprite("title","https://image2url.com/r2/default/images/1769034760468-66770a9e-1e8d-4689-bc7b-615faf8fb72f.png")
 loadSprite("itme","https://image2url.com/r2/default/images/1769125886850-bf4bbde8-313d-4606-aba8-7968a7902f0f.png")
-go("main menu")
+
 
 scene("scary",()=>{
 setBackground(0, 0, 0)
@@ -643,3 +665,6 @@ text("boo!")
 loadSound("boo!","https://image2url.com/r2/default/files/1770411402922-fbb20c36-388e-48b1-ab36-50aaff5ea908.mp3")
 play("boo!")
 })
+
+
+go("main menu")
