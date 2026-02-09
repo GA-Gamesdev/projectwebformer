@@ -29,7 +29,7 @@ loadSprite("wall", "https://image2url.com/r2/default/images/1768961826409-c79a6f
 loadSprite("key", "https://image2url.com/r2/default/images/1767392639254-f6b006f0-eafc-4724-a4f3-c88a8dbb3f8b.png")
 loadSprite("scary","https://image2url.com/r2/default/files/1770412488233-90b351ce-a5da-4c7e-9a2c-1595d2d9a2e6.png")
 loadSprite("mean","https://image2url.com/r2/default/files/1770412885351-0fda7981-2285-4b05-92f9-18966dac9442.png")
-
+loadSprite("exit","https://image2url.com/r2/default/images/1770669800026-2b510a95-dfb3-40b3-8740-2760680a6aaf.png")
 
 
 
@@ -515,10 +515,10 @@ if(mapID===1){
     levelcount.text="level: 1-2 very scary level"
 } else if(mapID===3){
     levelcount.text="level: 1-3 look at me, im on the roof"
-}
 } else if(mapID===4){
-    levelcount.text="level: 1-4 welcome to hell..."
+    levelcount.text="level: 1-4 hell"
 }
+
 // etc...
 
 })
