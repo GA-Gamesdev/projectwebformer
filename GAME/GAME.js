@@ -1,4 +1,4 @@
-kaplay()
+
 
 scene("game", () => {
 const level = addLevel(MAPS[mapID],mapconfig)
