@@ -1,4 +1,4 @@
- //a bunch of section 1 code is done. but there is some stuff i would like to add
+//a bunch of section 1 code is done. but there is some stuff i would like to add
 
 kaplay({
   width:800,
@@ -33,7 +33,8 @@ loadSprite("mean","https://image2url.com/r2/default/files/1770412885351-0fda7981
 loadSprite("exit","https://image2url.com/r2/default/images/1770773879373-5fdae88b-7e2e-46a8-8910-b87df2524aaa.png")
 loadSprite("space","https://image2url.com/r2/default/images/1770772571956-5af3da3a-e88f-4d6f-8cae-a1bb11d1a982.png")
 loadSprite("TRIGGER","https://image2url.com/r2/default/images/1770774288425-55888ce7-94cf-4f00-86ff-ff04a4bacd41.png")
-
+loadSprite("snow","https://image2url.com/r2/default/images/1770849818347-33110018-e069-4c3d-a32f-6994330c0b0b.png")
+loadSprite("ICE","https://image2url.com/r2/default/images/1770850198036-56a123da-f3b9-405a-b42c-9c7b0a667c7b.png")
 
 loadBitmapFont("happy", "https://image2url.com/r2/default/images/1769024704895-b60f3428-ba8b-408c-ae0c-7dc49ba24c07.png", 28, 37);
 
@@ -185,8 +186,8 @@ const MAPS = [
 "                       ==========                      ",
 "                    dd dDDDDDDDDd     $      ",
 "                       dDDDDDDDDd    $X$     ",
-"#     L                dDDDDDDDDd     $      ",
-"=======================dDDDDDDDDd!!!!!!!!!!!!",
+"#     L                dDDDDDDDDd            ",
+"=======================dDDDDDDDDd^^^^^^^^^^^^",
 "dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
 "dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
 "dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
@@ -214,7 +215,24 @@ const MAPS = [
 "",
 "",
 ],
-
+["                                             ", 
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"                                             ",
+"#                                            ",
+"----------------------------------------------",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+],
 
 
 ]
@@ -233,6 +251,24 @@ pos:(0,0),
 	body({isStatic:true}),
 offscreen({hide:true}),
 "solid"
+        ],
+
+        "-": () => [
+            sprite("snow"),
+            area(),
+	scale(1),
+	body({isStatic:true}),
+offscreen({hide:true}),
+"solid"
+        ],
+
+        "I": () => [
+            sprite("ICE"),
+            area(),
+	scale(1),
+	body({isStatic:true}),
+offscreen({hide:true}),
+"ice"
         ],
 
 
@@ -599,6 +635,8 @@ if(mapID===1){
     levelcount.text="level: 1-4 hell"
 } else if(mapID===0){
     levelcount.text="level: null"
+} else if(mapID===5){
+    levelcount.text="level: 2-1 the place where is snowed"
 }
 
 // etc...
@@ -750,7 +788,7 @@ const wrldmap = [
 " =================================",
 " =                                       ",
 " =                                                    ",
-" =#      1                                            ",
+" =#      1        2                                   ",
 " ==========================================================",
 
 ],
@@ -793,6 +831,15 @@ offscreen({hide:true}),
 "exit1"
         ],
 
+        "2": () => [
+        sprite("exit"),
+        area(),
+	pos(0,0),
+	scale(1),
+offscreen({hide:true}),
+"exit2"
+        ],
+
         "C": () => [
         sprite("TRIGGER"),
         area(),
@@ -810,14 +857,14 @@ mapID2 = 0
 let CAM=1
 
 const levelname = add([
-text("level 1",{font:"happy"}),
+text("",{font:"happy"}),
 scale(1.5),
 pos(40,500),
 fixed()
 ])
 
 const cleared = add([
-text("not cleared",{font:"happy"}),
+text("",{font:"happy"}),
 scale(0.7),
 pos(70,550),
 fixed()
@@ -869,7 +916,7 @@ setCamPos(lerp(getCamPos(), player.pos, 0.1))
 
 if(player.pos.y >= 3000){
 addKaboom(player.pos),
-player.pos=vec2(10,512),
+player.pos=vec2(138,512),
 attempts+=1
 }
 
@@ -878,20 +925,7 @@ attempts+=1
 
 const exit1 = map.get("exit1")[0]
 
-if(player.isColliding(exit1)){
-levelname.text="world 1"
 
-
-
-if(w1==="1"){
-cleared.text="CLEAR"
-}else{
-cleared.text="not clear..."
-}
-}else{
-levelname.text=""
-cleared.text=""
-}
 
 })
 
@@ -909,14 +943,31 @@ localStorage.setItem("webformerlv", mapID);
 go("main menu")
 })
 
+
+
+
 let canEnter = false
 
 onCollide("player", "exit1", () => {
     canEnter = true
+levelname.text="world 1"
+
+
+
+if(w1==="1"){
+cleared.text="CLEAR"
+}else{
+cleared.text="not clear..."
+}
 })
 
 onCollideEnd("player", "exit1", () => {
     canEnter = false
+levelname.text=""
+cleared.text=""
+
+
+
 })
 
 onKeyPress("up", () => {
@@ -925,6 +976,50 @@ onKeyPress("up", () => {
         go("game")
     }
 })
+
+
+
+
+
+//22222222222222222222222222222222
+let canEnter2 = false
+
+onCollide("player", "exit2", () => {
+    canEnter2 = true
+levelname.text="world 2"
+
+
+
+if(w1==="2"){
+cleared.text="CLEAR"
+}else{
+cleared.text="not clear..."
+}
+})
+
+onCollideEnd("player", "exit2", () => {
+    canEnter2 = false
+levelname.text=""
+cleared.text=""
+
+
+
+})
+
+onKeyPress("up", () => {
+    if (canEnter2) {
+        mapID = 5
+        go("game")
+    }
+})
+
+
+
+
+
+
+
+
 
 onCollide("player","camera",()=>{
 CAM = "0"
