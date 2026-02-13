@@ -1,3 +1,6 @@
+const CURRENT_VERSION = "0.0.1 bugfix 3";
+
+
 //a bunch of section 1 code is done. but there is some stuff i would like to add
 
 kaplay({
@@ -8,6 +11,48 @@ letterbox:true,
 stretch:true
 
 });
+
+async function checkForUpdate() {
+  try {
+    const res = await fetch(
+      "https://raw.githubusercontent.com/GA-Gamesdev/G.AGamesUpdatecheck/main/main/webformer.json",
+      { cache: "no-store" } // VERY important
+    );
+
+    const data = await res.json();
+
+    if (data.version !== CURRENT_VERSION) {
+      console.log(`Update available! Latest: ${data.version}`);
+
+      // optional UI
+add([
+      text("new version availiable",{font:"happy"}),
+pos(20,560),
+scale(0.70)
+])
+
+      // optional auto refresh
+      // location.reload(true);
+    } else {
+      console.log("Game is up to date");
+add([
+text("game up to date!",{font:"happy"}),
+pos(20,500),
+scale(0.89)
+])
+    }
+  } catch (e) {
+    console.warn("Could not check for updates");
+add([
+text("error 1 : couldn't fetch version",{font:"happy"}),
+pos(20,500),
+scale(0.89)
+])
+  }
+}
+
+checkForUpdate();
+
 
 layers(["background", "game", "foreground"], "game")
 
@@ -104,7 +149,7 @@ function addDialog() {
 }
 
 setGravity(1000)
-const speed=300
+const speed=325
 
 let mapID = 1
 let coinamnt = 0
@@ -449,7 +494,8 @@ offscreen({hide:true}),
 
 }
 }
-
+let PLRleft = false
+let PLRright = false
 let onice=false
 let icemove="right"
 scene("game", () => {
@@ -484,15 +530,35 @@ const player = level.get("player")[0]
 if(onice===false){
 
 onKeyDown("right",()=>{
-player.move(speed,0)
+PLRright= true
 })
 
+onKeyRelease("right",()=>{
+PLRright= false
+})
 onKeyDown("left",()=>{
-player.move(-speed,0)
+PLRleft= true
+})
+
+onKeyRelease("left",()=>{
+PLRleft= false
 })
 
 }
+onUpdate(()=>{
+if(PLRright){
+player.move(speed,0)
+}
+if(PLRleft){
+player.move(-speed,0)
+}})
 onKeyDown("space",()=>{
+if(player.isGrounded()){
+if(gravityflipped = "false"){
+player.jump(580)
+}}})
+
+onKeyDown("up",()=>{
 if(player.isGrounded()){
 if(gravityflipped = "false"){
 player.jump(580)
@@ -625,23 +691,28 @@ go("scary")
 onCollide("player","meany",()=>{
 localStorage.removeItem("webformerlv")
 localStorage.removeItem("w1")
+w1=0
 go("scary")
 })
 
 //ice
 const ice = get("ICE")[0]
-onCollide("player","ICE",()=>{
+onCollideUpdate("player","ICE",()=>{
 onice=true
-isKeyDown("left",()=>{
+if(PLRleft){
 icemove="left"
-})
-isKeyDown("right",()=>{
+}
+if(PLRright){
 icemove="right"
-})
+}
+
+console.log("on ice")
 })
 
 onCollideEnd("player","ICE",()=>{
 onice=false
+PLRright=false
+PLRleft=false
 })
 
 
@@ -650,7 +721,7 @@ onUpdate("player",()=>{
 if(onice===true){
 
 if(icemove==="right"){
-player.move(speed,0)
+PLRright=true
 }
 
 
@@ -658,7 +729,7 @@ player.move(speed,0)
 
 
 if(icemove==="left"){
-player.move(-speed,0)
+PLRleft=true
 }
 
 })
@@ -756,6 +827,8 @@ if(selected===0){
 localStorage.removeItem("webformerlv")
 localStorage.setItem("webformerlv", "1");
 localStorage.setItem("w1", "0");
+w1=0
+coinamnt=0
 mapID=1
 go("game")
 }
