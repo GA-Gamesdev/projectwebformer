@@ -1,6 +1,6 @@
 const CURRENT_VERSION = "0.0.1 bugfix 3";
 
-
+acheve()
 //a bunch of section 1 code is done. but there is some stuff i would like to add
 
 kaplay({
