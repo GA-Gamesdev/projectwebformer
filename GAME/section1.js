@@ -1,8 +1,9 @@
 const CURRENT_VERSION = "0.0.1 bugfix 3";
 
-acheve.load("memory")
+
 //a bunch of section 1 code is done. but there is some stuff i would like to add
 
+acheve.load("localStorage")
 kaplay({
   width:800,
 height:600,
@@ -621,7 +622,7 @@ go("loading")
 onCollide("player","exit",()=>{
 onKeyPress("space",()=>{
 player.destroy()
-
+acheve.grant("f8an9dj")
 localStorage.setItem("w1", "1");
 go("hubworld")
 })})
@@ -796,9 +797,20 @@ scale(0.7),
 
 ])
 
+add([
+text("achevements",{font:"happy"}),
+pos(400,350),
+anchor("center"),
+scale(0.7),
+
+
+
+
+])
+
 
 let selected = 0
-const optionsY = [255, 305,]
+const optionsY = [255, 305,350]
 
 onKeyPress("down", () => {
     selected++
@@ -842,6 +854,11 @@ go("hubworld")
 go("game")
 }
 
+}
+})
+onKeyPress("space",()=>{
+if(selected===2){
+go("achevements")
 }
 })
 
