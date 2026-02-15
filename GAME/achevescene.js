@@ -11,7 +11,7 @@ pos(10,20)
   sprite("acheve1"),
       scale(0.55),
           anchor("center"),
-      pos(89,65)
+      pos(84,65)
     
   ])
 }else{
@@ -24,10 +24,11 @@ pos(10,20)
   sprite("lock"),
     scale(0.5),
       anchor("center"),
-      pos(89,65)
+      pos(84,65)
   ])
 }
 })
+
 
 
 
