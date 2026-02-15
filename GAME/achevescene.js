@@ -6,7 +6,7 @@ add([
 rect(760,90,{radius:40}),
 
 pos(10,20),
-  color(99, 99, 99)
+ 
 ])
   add([
   sprite("acheve1"),
@@ -18,7 +18,7 @@ pos(10,20),
 }else{
 add([
 rect(760,90,{radius:40}),
-
+ color(99, 99, 99)
 pos(10,20)
 ])
     add([
@@ -29,6 +29,7 @@ pos(10,20)
   ])
 }
 })
+
 
 
 
