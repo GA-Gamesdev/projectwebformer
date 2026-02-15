@@ -10,7 +10,7 @@ pos(10,20)
   sprite("acheve1"),
       scale(0.55),
           anchor("center"),
-      pos(70,60)
+      pos(70,65)
     
   ])
 }else{
@@ -23,10 +23,11 @@ pos(10,20)
   sprite("acheve1"),
     scale(0.5),
       anchor("center"),
-      pos(50,70)
+      pos(50,65)
   ])
 }
 })
+
 
 
 
