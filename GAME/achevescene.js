@@ -5,7 +5,8 @@ if(acheve.isUnlocked("f8an9dj")){
 add([
 rect(760,90,{radius:40}),
 
-pos(10,20)
+pos(10,20),
+  color(99, 99, 99)
 ])
   add([
   sprite("acheve1"),
@@ -28,6 +29,7 @@ pos(10,20)
   ])
 }
 })
+
 
 
 
