@@ -9,8 +9,8 @@ kaplay({
 height:600,
 crisp:true,
 letterbox:true,
-stretch:true
-
+stretch:true,
+    maxFPS: 120,
 });
 
 async function checkForUpdate() {
@@ -84,6 +84,8 @@ loadSprite("ICE","https://image2url.com/r2/default/images/1770850198036-56a123da
 
 loadBitmapFont("happy", "https://image2url.com/r2/default/images/1769024704895-b60f3428-ba8b-408c-ae0c-7dc49ba24c07.png", 28, 37);
 
+
+loadMusic("mainmusic","https://image2url.com/r2/default/files/1772226560646-b2b0cb95-eb8a-451c-80ef-20e8acb7e2de.mp3")
 //this is from kaplayjs.com
 function enemy(speed = 60, dir = 1) {
 	return {
@@ -166,82 +168,83 @@ keyCollected = "false"
 
 
 const MAPS = [
-["                                             ", 
-"                                             ",
-"                                             ",
-"                                             ",
-"                                             ",
-"                                             ",
-"                                             ",
-"                                             ",
-"#                                            ",
-"=============================================",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
-"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+["                                                              b", 
+"                                                              b",
+"              b                                               b",
+"              b                                               b",
+"              b                                               b",
+"              b                                               b",
+"              b                                               b",
+"              b                                               b",
+"              b #                                             b",
+"---------------===============================================----------------------------------------",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
 ],
 [
-"                                X   $$", 
-"                               ===  ==",
-"                                        ^",
-"                                    $$ ===",
-"                    $               ^^",
-"                               ^^  ====",
-"                    T         ====     ",
-"                       ==== ",
-"#        ^   6  ^      dDDd^^^^^^^^^^^^^^^^^^^",
-"=======================DDDD===================",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+"                                                X   $$        b", 
+"                                               ===  ==        b",
+"              b                                        ^      b",
+"              b                                    $$ ===     b",
+"              b                             $      ^^         b",
+"              b                               ^^  ====        b",
+"              b                    T         ====             b",
+"              b                        ====                   b",
+"              b #        ^   6  ^      dDDd^^^^^^^^^^^^^^^^^^^b",
+"---------------========================DDDD-----------------------------------------------------------",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
 ],
 ///level base below
 [
-"                                             ", 
-"                           $                 ",
-"                           T                 ",
-"                                    X        ",
-"                   $$             =====              ",
-"            $      ^^   ======    YYYYY      ",
-"                  ====                       ",
-"           !!!                               ",
-"#      =========!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-"=======DDDDDDDDD=============================",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+"              b                                              b", 
+"              b                            $                 b",
+"              b                            T                 b",
+"              b                                     X        b",
+"              b                    $$             =====      b",
+"              b             $      ^^   ======    YYYYY      b",
+"              b                   ====                       b",
+"              b            !!!                               b",
+"              b #      =========!!!!!!!!!!!!!!!!!!!!!!!!!!!!!b",
+"---------------========DDDDDDDDD----------------------------------------------------------------------",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
 ],
 
-["                    dddddddddddd                        ", 
-"                     d G  $$$   d",
-"      dddddddddddddddd          ddddddddddd     ",
-"                    G                    X    ",
-"                         ^  6 ^ L            ",
-"                       ==========                      ",
-"                    dd dDDDDDDDDd     $      ",
-"                       dDDDDDDDDd    $X$     ",
-"#     L                dDDDDDDDDd            ",
-"=======================dDDDDDDDDd^^^^^^^^^^^^",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
+["             b                      dddddddddddd               b", 
+"              b                      d G  $$$   d               b",
+"              b       dddddddddddddddd          ddddddddddd     b",
+"              b                     G                    X      b",
+"              b                          ^  6 ^ L               b",
+"              b                        ==g====g==               b",
+"              b                     dd dDDDDDDDDd     $         b",
+"              b                        dDDDDDDDDd    $X$        b",
+"              b #     L                dDDDDDDDDd               b",
+"---------------========================dddddddddd^^^^^^^^^^^^^^^^^^^^--------------------------------",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
 ],
+
 
 ["                         G           ^^^         ", 
 "                ddddddd                       ",
@@ -299,14 +302,24 @@ offscreen({hide:true}),
 "solid"
         ],
 
-        "-": () => [
-            sprite("snow"),
+        "b": () => [
+            sprite("ground"),
             area(),
 	scale(1),
+opacity(0),
 	body({isStatic:true}),
 offscreen({hide:true}),
 "solid"
         ],
+
+        "-": () => [
+            sprite("ground"),
+            
+	    offscreen({hide:true}),
+
+        ],
+
+
 
         "I": () => [
             sprite("ICE"),
@@ -495,12 +508,20 @@ offscreen({hide:true}),
 
 }
 }
+
+
+
+
+
 let PLRleft = false
 let PLRright = false
 let onice=false
 let icemove="right"
 scene("game", () => {
 const level = addLevel(MAPS[mapID],mapconfig)
+const music = play("mainmusic", {
+    loop: true
+})
 setBackground(184, 255, 248)
 //level display and coin display and deaths counter
 
@@ -581,6 +602,12 @@ addKaboom(player.pos),
 player.pos=vec2(10,512),
 attempts+=1
 }
+
+if(player.pos.y <= -2999){
+addKaboom(player.pos),
+player.pos=vec2(10,512),
+attempts+=1
+}
 })
 
 
@@ -589,13 +616,13 @@ attempts+=1
 //spike/death conditions
 const spike = level.get("spike")[0]
 onCollide("player","spike",()=>{
-player.pos=vec2(10,512)
+player.pos=vec2(1152,512)
 addKaboom(player.pos),
 attempts+=1
 })
 
 onKeyPress("r",()=>{
-player.pos=vec2(10,512)
+player.pos=vec2(1152,512)
 addKaboom(player.pos),
 attempts+=1
 player.gravityScale= 1
@@ -603,7 +630,7 @@ player.angle=0
 })
 
 onGamepadButtonPress("north",()=>{
-player.pos=vec2(10,512)
+player.pos=vec2(1152,512)
 addKaboom(player.pos),
 attempts+=0.5
 })
@@ -647,7 +674,7 @@ const enemy = level.get("enemy")[0]
 
 
 onCollide("player","enemy",()=>{
-player.pos=vec2(10,512)
+player.pos=vec2(1152,512)
 addKaboom(player.pos),
 
 attempts+=1
@@ -724,6 +751,7 @@ if(onice===true){
 if(icemove==="right"){
 PLRright=true
 }
+
 
 
 }
@@ -1158,5 +1186,30 @@ CAM = "1"
 
 })
 
+//gagames start for kaplay
 
-go("main menu")
+scene("loadgame",()=>{
+setBackground(0,0,0)
+loadSprite("kaplay","https://image2url.com/r2/default/images/1772056803247-6cfb2277-0791-4e76-8ce9-d5bee05420dd.png")
+loadSprite("ga","https://image2url.com/r2/default/images/1772058295528-ccb9ac04-b3b6-4e72-b32f-01b373fa06fc.png")
+
+add([
+sprite("ga"),
+anchor("center"),
+pos(400,300),
+scale(0.3)
+])
+add([
+text("made by"),
+anchor("center"),
+pos(400,150),
+scale(0.88)
+])
+
+wait(3, () => {
+   go("main menu")
+})
+})
+go("loadgame")
+
+
