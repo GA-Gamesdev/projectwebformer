@@ -591,6 +591,13 @@ if(player.isGrounded()){
 if(gravityflipped = "false"){
 player.jump(580)
 }}})
+onGamepadButtonDown("dpad-right",()=>{
+player.move(speed/2,0)
+})
+onGamepadButtonDown("dpad-left",()=>{
+player.move(-speed/2,0)
+})
+
 
 player.onUpdate(()=>{
 setCamPos(lerp(getCamPos(), player.pos, 0.1))
@@ -635,6 +642,7 @@ addKaboom(player.pos),
 attempts+=0.5
 })
 
+
 //goal
 const goal = level.get("goal")[0]
 onCollide("player","goal",()=>{
@@ -645,6 +653,17 @@ mapID+=1
 localStorage.setItem("webformerlv", mapID);
 go("loading")
 })})
+
+onCollide("player","goal",()=>{
+onGamepadButtonPress("south",()=>{
+player.destroy()
+goal.destroy()
+mapID+=1
+localStorage.setItem("webformerlv", mapID);
+go("loading")
+})})
+
+
 
 onCollide("player","exit",()=>{
 onKeyPress("space",()=>{
