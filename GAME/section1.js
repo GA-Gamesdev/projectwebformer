@@ -1,4 +1,4 @@
-const CURRENT_VERSION = "0.0.3 PRE";
+const CURRENT_VERSION = "0.0.1 bugfix 3";
 
 
 //a bunch of section 1 code is done. but there is some stuff i would like to add
@@ -231,7 +231,7 @@ const MAPS = [
 "              b       dddddddddddddddd          ddddddddddd     b",
 "              b                     G                    X      b",
 "              b                          ^  6 ^ L               b",
-"              b                        ==g====g==               b",
+"              b                        ==-====-==               b",
 "              b                     dd dDDDDDDDDd     $         b",
 "              b                        dDDDDDDDDd    $X$        b",
 "              b #     L                dDDDDDDDDd               b",
@@ -515,6 +515,8 @@ offscreen({hide:true}),
 
 let PLRleft = false
 let PLRright = false
+let PLRmoving = false
+let PLRjumping = false
 let onice=false
 let icemove="right"
 scene("game", () => {
@@ -553,17 +555,29 @@ if(onice===false){
 
 onKeyDown("right",()=>{
 PLRright= true
+PLRmoving = true
+
 })
 
 onKeyRelease("right",()=>{
 PLRright= false
+PLRmoving = false
+
+
+
+
+
 })
 onKeyDown("left",()=>{
 PLRleft= true
+PLRmoving = true
+
 })
 
 onKeyRelease("left",()=>{
 PLRleft= false
+PLRmoving = false
+
 })
 
 }
@@ -578,18 +592,56 @@ onKeyDown("space",()=>{
 if(player.isGrounded()){
 if(gravityflipped = "false"){
 player.jump(580)
+tween(1,1.30,0.1,(twen)=>{player.scale.y=twen},easings.elasticOut)
+tween(1,0.93,0.1,(twenx)=>{player.scale.x=twenx},easings.elasticOut)
+wait(0.2,()=>{
+tween(player.scale.y,0.92,0.1,(twen)=>{player.scale.y=twen},easings.bounceOut)
+tween(player.scale.x,1.1,0.1,(twenx)=>{player.scale.x=twenx},easings.bounceOut)
+wait(0.2,()=>{
+tween(player.scale.y,1,0.2,(twen)=>{player.scale.y=twen},easings.bounceOut)
+tween(player.scale.x,1,0.2,(twenx)=>{player.scale.x=twenx},easings.bounceOut)
+})
+})
 }}})
 
 onKeyDown("up",()=>{
 if(player.isGrounded()){
 if(gravityflipped = "false"){
 player.jump(580)
+
+tween(1,1.30,0.1,(twen)=>{player.scale.y=twen},easings.elasticOut)
+tween(1,0.93,0.1,(twenx)=>{player.scale.x=twenx},easings.elasticOut)
+wait(0.2,()=>{
+tween(player.scale.y,0.92,0.1,(twen)=>{player.scale.y=twen},easings.bounceOut)
+tween(player.scale.x,1.1,0.1,(twenx)=>{player.scale.x=twenx},easings.bounceOut)
+wait(0.2,()=>{
+tween(player.scale.y,1,0.2,(twen)=>{player.scale.y=twen},easings.bounceOut)
+tween(player.scale.x,1,0.2,(twenx)=>{player.scale.x=twenx},easings.bounceOut)
+})
+})
 }}})
 
+
+
+if(player.isGrounded()){
+if(player.scale.y===1.40){
+tween(player.scale.y,1,0.1,(twen)=>{player.scale.y=twen})
+tween(player.scale.x,1,0.1,(twenx)=>{player.scale.x=twenx})
+}}
 onGamepadButtonDown("south",()=>{
 if(player.isGrounded()){
 if(gravityflipped = "false"){
 player.jump(580)
+tween(1,1.30,0.1,(twen)=>{player.scale.y=twen},easings.elasticOut)
+tween(1,0.93,0.1,(twenx)=>{player.scale.x=twenx},easings.elasticOut)
+wait(0.2,()=>{
+tween(player.scale.y,0.92,0.1,(twen)=>{player.scale.y=twen},easings.bounceOut)
+tween(player.scale.x,1.1,0.1,(twenx)=>{player.scale.x=twenx},easings.bounceOut)
+wait(0.2,()=>{
+tween(player.scale.y,1,0.2,(twen)=>{player.scale.y=twen},easings.bounceOut)
+tween(player.scale.x,1,0.2,(twenx)=>{player.scale.x=twenx},easings.bounceOut)
+})
+})
 }}})
 onGamepadButtonDown("dpad-right",()=>{
 player.move(speed/2,0)
@@ -677,10 +729,11 @@ go("hubworld")
 //coin
 const coin = level.get("coin")[0]
 player.onCollide("coin",(f)=>{
-destroy(f)
+
 coinamnt+=1
 localStorage.setItem("webformercon",coinamnt)
 coins.text = "coins: "+coinamnt
+destroy(f)
 })
 
 coins.text = "coins: "+coinamnt
