@@ -1,4 +1,4 @@
-const CURRENT_VERSION = "0.0.1 bugfix 3";
+const CURRENT_VERSION = "0.0.3 image quk fix";
 
 
 //a bunch of section 1 code is done. but there is some stuff i would like to add
@@ -60,32 +60,25 @@ layers(["background", "game", "foreground"], "game")
 let w1 = localStorage.getItem("w1")
 let exitfrom = 0
 
-loadSprite("player", "https://image2url.com/r2/default/images/1767393290724-f4cd0b10-37ed-49fc-b7a1-c28fc273a3c1.png")
-loadSprite("ground","https://image2url.com/r2/default/images/1767393265499-2c1de6bd-257b-4b0e-b211-44365e8585da.png")
-loadSprite("spike", "https://image2url.com/r2/default/images/1767393236351-b79257ed-5d6c-4177-9e43-c52f999a00f5.png")
-loadSprite("jump", "https://image2url.com/r2/default/images/1767393218976-05dcea83-001c-4998-b2d3-e176a3e28758.png")
-loadSprite("goal", "https://image2url.com/r2/default/images/1767236104411-ba54dbab-0aaf-4ace-99af-ce6e1610716b.png")
-loadSprite("crate", "https://image2url.com/r2/default/images/1767393183587-ebbbb814-1966-46d2-b50e-5b913baa45d7.png")
-loadSprite("coin", "https://image2url.com/r2/default/images/1767393103110-b41c3d06-760d-499f-bc6e-7635eac902ce.png")
-loadSprite("enemy", "https://image2url.com/r2/default/images/1767393076731-674bdd0d-c817-4943-b490-1ba161a7c236.png")
-loadSprite("tree", "https://image2url.com/r2/default/images/1767393042998-ea2bdc5c-212f-4710-b284-334cbceb27e3.png")
-loadSprite("dirt", "https://image2url.com/r2/default/images/1767392907228-72810848-2323-43e2-a6d0-6200431e02ab.png")
-loadSprite("ladder", "https://image2url.com/r2/default/images/1767392874973-0f462676-b9f4-47b7-abd0-a307d29ab2f2.png")
-loadSprite("flip", "https://image2url.com/r2/default/images/1767392785338-9544f032-69b9-4d05-b596-2315a2c0c648.png")
-loadSprite("wall", "https://image2url.com/r2/default/images/1768961826409-c79a6f60-31d0-4084-9b69-c199ae9b13f6.png")
-loadSprite("key", "https://image2url.com/r2/default/images/1767392639254-f6b006f0-eafc-4724-a4f3-c88a8dbb3f8b.png")
-loadSprite("scary","https://image2url.com/r2/default/files/1770412488233-90b351ce-a5da-4c7e-9a2c-1595d2d9a2e6.png")
-loadSprite("mean","https://image2url.com/r2/default/files/1770412885351-0fda7981-2285-4b05-92f9-18966dac9442.png")
-loadSprite("exit","https://image2url.com/r2/default/images/1770773879373-5fdae88b-7e2e-46a8-8910-b87df2524aaa.png")
+loadSprite("player", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/player.png")
+loadSprite("ground","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/ground.png")
+loadSprite("spike", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/spike.png")
+loadSprite("goal", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/goal.png")
+loadSprite("coin", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/coin.png")
+loadSprite("enemy", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/enemy.png")
+loadSprite("tree", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/tree.png")
+loadSprite("dirt", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/dirt.png")
+loadSprite("ladder", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/ladder.png")
+loadSprite("flip", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/flip.png")
+loadSprite("scary","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/scary.png")
+loadSprite("mean","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/mean.png")
 loadSprite("space","https://image2url.com/r2/default/images/1770772571956-5af3da3a-e88f-4d6f-8cae-a1bb11d1a982.png")
 loadSprite("TRIGGER","https://image2url.com/r2/default/images/1770774288425-55888ce7-94cf-4f00-86ff-ff04a4bacd41.png")
-loadSprite("snow","https://image2url.com/r2/default/images/1770849818347-33110018-e069-4c3d-a32f-6994330c0b0b.png")
-loadSprite("ICE","https://image2url.com/r2/default/images/1770850198036-56a123da-f3b9-405a-b42c-9c7b0a667c7b.png")
 
-loadBitmapFont("happy", "https://image2url.com/r2/default/images/1769024704895-b60f3428-ba8b-408c-ae0c-7dc49ba24c07.png", 28, 37);
+loadBitmapFont("happy", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/happy_font.png", 28, 37);
 
 
-loadMusic("mainmusic","https://image2url.com/r2/default/files/1772226560646-b2b0cb95-eb8a-451c-80ef-20e8acb7e2de.mp3")
+loadMusic("mainmusic","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/mainmusic.mp3")
 //this is from kaplayjs.com
 function enemy(speed = 60, dir = 1) {
 	return {
@@ -972,8 +965,8 @@ go("achevements")
 
 //ui asset loading
 
-loadSprite("title","https://image2url.com/r2/default/images/1769034760468-66770a9e-1e8d-4689-bc7b-615faf8fb72f.png")
-loadSprite("itme","https://image2url.com/r2/default/images/1769125886850-bf4bbde8-313d-4606-aba8-7968a7902f0f.png")
+loadSprite("title","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/logo.png")
+loadSprite("itme","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/cursor.png")
 
 
 scene("scary",()=>{
@@ -981,7 +974,7 @@ setBackground(0, 0, 0)
 add([
 text("boo!")
 ])
-loadSound("boo!","https://image2url.com/r2/default/files/1770411402922-fbb20c36-388e-48b1-ab36-50aaff5ea908.mp3")
+loadSound("boo!","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/boo.mp3")
 play("boo!")
 
 onKeyPress("space",()=>{
@@ -1262,9 +1255,7 @@ CAM = "1"
 
 scene("loadgame",()=>{
 setBackground(0,0,0)
-loadSprite("kaplay","https://image2url.com/r2/default/images/1772056803247-6cfb2277-0791-4e76-8ce9-d5bee05420dd.png")
-loadSprite("ga","https://image2url.com/r2/default/images/1772058295528-ccb9ac04-b3b6-4e72-b32f-01b373fa06fc.png")
-
+loadSprite("ga", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/gagames.png")
 add([
 sprite("ga"),
 anchor("center"),
