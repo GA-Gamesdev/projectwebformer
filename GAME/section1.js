@@ -1,4 +1,4 @@
-const CURRENT_VERSION = "0.0.3 game pro improve";
+const CURRENT_VERSION = "0.0.3 level pak 1/4";
 
 
 //a bunch of section 1 code is done. but there is some stuff i would like to add
@@ -74,6 +74,10 @@ loadSprite("scary","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/ass
 loadSprite("mean","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/mean.png")
 loadSprite("space","https://image2url.com/r2/default/images/1770772571956-5af3da3a-e88f-4d6f-8cae-a1bb11d1a982.png")
 loadSprite("TRIGGER","https://image2url.com/r2/default/images/1770774288425-55888ce7-94cf-4f00-86ff-ff04a4bacd41.png")
+loadSprite("dash","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/dashy2.png")
+loadSprite("mystery","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/wfhuh.png")
+loadSprite("speed","https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/speed2.png")
+
 
 loadBitmapFont("happy", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/happy_font.png", 28, 37);
 
@@ -145,7 +149,7 @@ function addDialog() {
 }
 
 setGravity(1000)
-const speed=325
+let speed=325
 
 let mapID = 1
 let coinamnt = 0
@@ -257,25 +261,25 @@ const MAPS = [
 "",
 "",
 ],
-["                                             ", 
-"                                             ",
-"                                             ",
-"                                             ",
-"                                             ",
-"                                             ",
-"                                             ",
-"                                             ",
-"#                                            ",
-"-------------------------III-----------------",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-"dDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",
-],
 
+["                                                              b", 
+"                                                              b",
+"              b                                               b",
+"              b                                               b",
+"              b             ?                                 b",
+"              b                                               b",
+"              b          ^    ^     $$$                       b",
+"              b          =======              ^               b",
+"              b #    ====DDDDDDD^^^^^^^^^^^====     6 ^    X  b",
+"---------------======DDDDDDDDDDD-----------DDDD===============----------------------------------------",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+],
 
 ]
 
@@ -339,6 +343,17 @@ offscreen({hide:true}),
 "player"
         ],
 
+        "1": () => [
+        sprite("speed"),
+        area(),
+	pos(10,20),
+	scale(1),
+	body(),
+offscreen({hide:true}),
+"speedup",
+
+        ],
+
         "6": () => [
         sprite("enemy"),
         area({ shape: new Rect(vec2(23,18), 21, 46)  }),
@@ -350,6 +365,17 @@ offscreen({hide:true}),
 "enemy",
 "solid"
         ],
+
+        "?": () => [
+        sprite("mystery"),
+        area(),
+	
+	scale(1),
+	body({isStatic:true}),
+	"mystery",
+
+        ],
+
 
         "^": () => [
         sprite("spike"),
@@ -512,11 +538,11 @@ let PLRmoving = false
 let PLRjumping = false
 let onice=false
 let icemove="right"
+let inDashL = false;
+
 scene("game", () => {
 const level = addLevel(MAPS[mapID],mapconfig)
-const music = play("mainmusic", {
-    loop: true
-})
+
 setBackground(184, 255, 248)
 //level display and coin display and deaths counter
 
@@ -556,24 +582,29 @@ onKeyRelease("right",()=>{
 PLRright= false
 PLRmoving = false
 
-
-
-
-
 })
+ if (!inDashL) {
 onKeyDown("left",()=>{
 PLRleft= true
 PLRmoving = true
-
 })
-
+}
 onKeyRelease("left",()=>{
+if (!inDashL){
 PLRleft= false
 PLRmoving = false
-
+}
 })
 
 }
+
+onUpdate(() => {
+  if (inDashL) {
+    PLRleft = true;
+    PLRmoving = true;
+  }
+
+});
 onUpdate(()=>{
 if(PLRright){
 player.move(speed,0)
@@ -651,40 +682,47 @@ setCamPos(lerp(getCamPos(), player.pos, 0.1))
 
 if(player.pos.y >= 3000){
 addKaboom(player.pos),
-player.pos=vec2(10,512),
+go("game")
 attempts+=1
+speed=325
 }
 
 if(player.pos.y <= -2999){
 addKaboom(player.pos),
-player.pos=vec2(10,512),
+go("game")
 attempts+=1
+speed=325
 }
 })
 
 
-
+if(mapID===5){
+acheve.grant("f8an9dj")
+}
 
 //spike/death conditions
 const spike = level.get("spike")[0]
 onCollide("player","spike",()=>{
-player.pos=vec2(1152,512)
+go("game")
 addKaboom(player.pos),
 attempts+=1
+speed=325
 })
 
 onKeyPress("r",()=>{
-player.pos=vec2(1152,512)
+go("game")
 addKaboom(player.pos),
 attempts+=1
+speed=325
 player.gravityScale= 1
 player.angle=0
 })
 
 onGamepadButtonPress("north",()=>{
-player.pos=vec2(1152,512)
+go("game")
 addKaboom(player.pos),
 attempts+=0.5
+speed=325
 })
 
 
@@ -710,13 +748,6 @@ go("loading")
 
 
 
-onCollide("player","exit",()=>{
-onKeyPress("space",()=>{
-player.destroy()
-acheve.grant("f8an9dj")
-localStorage.setItem("w1", "1");
-go("hubworld")
-})})
 
 
 //coin
@@ -755,6 +786,10 @@ player.gravityScale= -1
 player.angle=180
 })
 
+const music = play("mainmusic", {
+    loop: true
+})
+
 onCollide("player","flip",()=>{
 player.gravityScale= 1
 player.angle=0
@@ -788,45 +823,25 @@ w1=0
 go("scary")
 })
 
-//ice
-const ice = get("ICE")[0]
-onCollideUpdate("player","ICE",()=>{
-onice=true
-if(PLRleft){
-icemove="left"
-}
-if(PLRright){
-icemove="right"
-}
+//mystery block
 
-console.log("on ice")
-})
+player.onHeadbutt((o)=>{
+if(o.is("mystery")){
 
-onCollideEnd("player","ICE",()=>{
-onice=false
-PLRright=false
-PLRleft=false
-})
+const pwrup = level.spawn("1",o.tilePos.sub(0,1))
+pwrup.jump(400)
+pwrup.collected = true
+destroy(o)
 
-
-
-onUpdate("player",()=>{
-if(onice===true){
-
-if(icemove==="right"){
-PLRright=true
-}
-
-
-
-}
-
-
-if(icemove==="left"){
-PLRleft=true
 }
 
 })
+
+player.onCollide("speedup",(o)=>{
+destroy(o)
+speed=720
+})
+
 //level names
 if(mapID===1){
     levelcount.text="level: 1-1 hey thats the roof"
@@ -839,7 +854,7 @@ if(mapID===1){
 } else if(mapID===0){
     levelcount.text="level: null"
 } else if(mapID===5){
-    levelcount.text="level: 2-1 the place where it snowed"
+    levelcount.text="level: 1-5 epik powers"
 }
 
 // etc...
@@ -983,7 +998,7 @@ go("main menu")
 })
 
 scene("loading",()=>{
-
+music.stop()
 go("game")
 
 })
@@ -1255,7 +1270,7 @@ CAM = "1"
 
 scene("loadgame",()=>{
 setBackground(0,0,0)
-loadSprite("ga", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/gagames.png")
+loadSprite("ga", "https://cdn.jsdelivr.net/gh/GA-Gamesdev/projectwebformer/assets/gagames2.png")
 add([
 sprite("ga"),
 anchor("center"),
